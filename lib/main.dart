@@ -84,30 +84,5 @@ class MyApp extends StatelessWidget {
 
 
 
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//
-//      // home: SplashScreen(),
-//       initialRoute:SplashScreen.routeName,
-//       routes: {
-//         SplashScreen.routeName : (context) => SplashScreen(),
-//         OnboardingScreen.routeName: (context) => OnboardingScreen(),
-//         LoginScreen.routeName: (context) => LoginScreen(),
-//         RegisterScreen.routeName: (context) => RegisterScreen(),
-//         ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
-//         // ButtonNavscreen.routeName: (context) => ButtonNavscreen(),
-//         // UserListScreen.routeName : (context) => UserListScreen(),
-//
-//
-//         // : (context) => const Homepage(),
-//       },
-//
-//     );
-//   }
-// }
 
