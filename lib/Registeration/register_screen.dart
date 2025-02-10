@@ -14,6 +14,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  bool _isObscure = true;
   final _formKey = GlobalKey<FormState>();
   final _apiReg = RegisterApi();
 
@@ -164,7 +165,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 SizedBox(height: 15),
                 TextFormField(
-                  obscureText: true,
+                  obscureText:_isObscure,
                   decoration: InputDecoration(
                     hintText: languageProvider.locale.languageCode == 'ar'
                         ? ' كلمه المرور'
@@ -173,8 +174,20 @@ class _RegisterScreenState extends State<RegisterScreen> {
                     filled: true,
                     fillColor: Color(0XFF282A28),
                     border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                    prefixIcon: ImageIcon(AssetImage('assets/images/Passwod_Icon.png') , color: Colors.white,)
+                    prefixIcon: ImageIcon(AssetImage('assets/images/Passwod_Icon.png') , color: Colors.white,),
+                    suffixIcon:IconButton(
+                  icon: Icon(
+                  _isObscure ? Icons.visibility_off : Icons.visibility,
+                    color: Colors.white,
                   ),
+                  onPressed: () {
+                    setState(() {
+                      _isObscure = !_isObscure;
+                    });
+                  },
+                ),
+          ),
+
                   validator: (value) {
                     if (value == null || value.length < 6) return "Password must be at least 6 characters";
                     return null;
@@ -184,7 +197,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 SizedBox(height: 15),
                 TextFormField(
-                  obscureText: true,
+                  obscureText: _isObscure,
                   decoration: InputDecoration(
                       hintText: languageProvider.locale.languageCode == 'ar'
                           ? '  تأكيد كلمه المرور'
@@ -193,7 +206,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       filled: true,
                       fillColor: Color(0XFF282A28),
                       border: OutlineInputBorder(borderRadius: BorderRadius.circular(8)),
-                      prefixIcon: ImageIcon(AssetImage('assets/images/Passwod_Icon.png') , color: Colors.white,)
+                      prefixIcon: ImageIcon(AssetImage('assets/images/Passwod_Icon.png') , color: Colors.white,),
+                    suffixIcon:IconButton(
+                      icon: Icon(
+                        _isObscure ? Icons.visibility_off : Icons.visibility,
+                        color: Colors.white,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isObscure = !_isObscure;
+                        });
+                      },
+                    ),
                   ),
                   onChanged: (value) => _password = value,
                   validator: (value) {

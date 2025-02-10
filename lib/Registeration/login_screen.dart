@@ -16,6 +16,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool _isObscure = true;
 
   final _formKey = GlobalKey<FormState>();
   final _apiLog = RegisterApi();
@@ -45,11 +46,19 @@ class _LoginScreenState extends State<LoginScreen> {
       ),
     );
 
+    if (_formKey.currentState!.validate()) {
+      _formKey.currentState!.save();
+      print("Email: $_email");
+      print("Password: $_password");
+
+    }
+
     if (response["success"]) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => HomeScreen()),
-      );
+      // Navigator.pushReplacement(
+      //   context,
+      //   MaterialPageRoute(builder: (context) => HomeScreen()),
+      // );
+      Navigator.pushNamed(context, HomeScreen.routName);
     }
   }
 
@@ -94,7 +103,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 15),
                TextFormField(
-                obscureText: true,
+                obscureText: _isObscure,
                 decoration: InputDecoration(
                   hintText: languageProvider.locale.languageCode == 'ar'
                       ? 'كلمة المرور'
@@ -103,10 +112,20 @@ class _LoginScreenState extends State<LoginScreen> {
                   fillColor: Color(0XFF282A28),
                   hintStyle: TextStyle( color: Colors.white , fontWeight: FontWeight.bold),
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(8),
                   ),
                   prefixIcon: ImageIcon(AssetImage('assets/images/Passwod_Icon.png') , color: Colors.white,),
-                  suffixIcon: Icon(Icons.visibility_off, color: Colors.white),
+                  suffixIcon:IconButton(
+                    icon: Icon(
+                      _isObscure ? Icons.visibility_off : Icons.visibility,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                      });
+                    },
+                  ),
                 ),
                  validator: (value) {
                    if (value == null || value.length < 6) return "Password must be at least 6 characters";
@@ -130,11 +149,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               SizedBox(height: 20),
               ElevatedButton(
-                onPressed: (){Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                );
-                  },
+                onPressed: _login,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Color(0XFFF6BD00),
                   minimumSize: Size(double.infinity, 50),

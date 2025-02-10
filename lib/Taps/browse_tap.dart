@@ -21,11 +21,10 @@ class BrowseTap extends StatelessWidget {
             return Center(child: CircularProgressIndicator());
            } else if (snapshot.hasError) {
     return Center(child: Text("Error: ${snapshot.error}", style: TextStyle(color: Colors.white)));
-    } else if (!snapshot.hasData || snapshot.data?.genres == null) {
+    } else if (!snapshot.hasData) {
             print("Data: ${snapshot.data}");
       return Center(child: Text("No data found", style: TextStyle(color: Colors.white)));
     }
-
           var data = snapshot.data!.genres!;
           return ListView.separated(
             itemBuilder: (context, index) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/Model/movie_response_home.dart';
+import 'package:movies/Registeration/forgetpassword_screen.dart';
 import 'package:movies/api_manager.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -25,14 +26,13 @@ class _HomeTapState extends State<HomeTap> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Movie App"),
-        leading: const Icon(Icons.menu),
         centerTitle: true,
-        actions: const [
-          Icon(Icons.search_rounded),
-          SizedBox(width: 20),
-          Icon(Icons.notifications),
-          SizedBox(width: 10),
-        ],
+        leading:  IconButton(
+           icon:Icon(Icons.arrow_back),
+        onPressed: () {
+          Navigator.pushNamed(context, ForgotPasswordScreen.routeName);
+        },
+      ),
       ),
       body: SingleChildScrollView(
         child: Padding(

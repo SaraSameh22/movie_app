@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:movies/Provider/language_provider.dart';
-import 'package:movies/forgetpassword_screen.dart';
-import 'package:movies/login_screen.dart';
+import 'package:movies/Registeration/forgetpassword_screen.dart';
+import 'package:movies/Registeration/login_screen.dart';
+import 'package:movies/home_screen.dart';
 import 'package:movies/onboarding_screen.dart';
-import 'package:movies/register_screen.dart';
+import 'package:movies/Registeration/register_screen.dart';
 import 'package:movies/splash_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -53,6 +54,7 @@ class MyApp extends StatelessWidget {
         LoginScreen.routeName: (context) => LoginScreen(),
         RegisterScreen.routeName: (context) => RegisterScreen(),
         ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
+        HomeScreen.routName : (context)=>HomeScreen(),
       },
         );
       },

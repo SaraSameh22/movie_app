@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class RegisterApi {
-  final String baseUrl = "https://route-movie-apis.vercel.app/";
+  final String baseUrl = "https://route-movie-apis.vercel.app";
 
   Future<Map<String, dynamic>> registerUser(
       String name,
