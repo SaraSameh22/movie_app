@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:movies/Model/search_response.dart';
-import 'dart:convert';
 import 'package:movies/api_manager.dart';
 import 'package:movies/movie_card.dart';
 
@@ -15,25 +13,17 @@ class _SearchTabState extends State<SearchTab> {
   Future<SearchResponse>? searchResults;
 
   final TextEditingController _searchController = TextEditingController();
-  bool _isLoading = false;
-  List<dynamic> _movies = [];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      appBar: AppBar(
-        title: Text("Search"),
-        centerTitle: true,
-        backgroundColor: Colors.black,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
             TextField(
               controller: _searchController,
-              onSubmitted: ApiManager.searchMovies,
               style: TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: "Search",
@@ -54,41 +44,50 @@ class _SearchTabState extends State<SearchTab> {
           },
         ),
             const SizedBox(height: 16),
-            if (_isLoading)
-              Center(
-                child: CircularProgressIndicator(color: Colors.blue),
-              ),
-            if (!_isLoading && _movies.isEmpty)
               Expanded(
-                child: Center(
-                  child: Image.asset(
-                    'assets/images/empty.png',
-                    width: 124,
-                    height: 124,
-                  ),
-                ),
-              )
-            else if (!_isLoading)
-              Expanded(
-                child: GridView.builder(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    childAspectRatio: 2 / 3,
-                  ),
-                  itemCount: _movies.length,
-                  itemBuilder: (context, index) {
-                    final movie = _movies[index];
-                    return MovieCard(
-                      title: movie['title'] ?? "Unknown Title",
-                      imagePath: movie['poster_path'] != null
-                          ? "https://image.tmdb.org/t/p/w500${movie['poster_path']}"
-                          : "assets/images/empty.png", // Fallback image
-                      // rating: movie['rating']?.toString() ?? "N/A",
-                    );
-                  },
-                ),
+                child:
+                Container(
+                  margin: const EdgeInsets.symmetric(vertical: 10),
+                  height: 250,
+                  child:
+                  FutureBuilder<SearchResponse>(
+                    future:ApiManager.searchMovies(query),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      final movies = snapshot.data?.results ?? [];
+                      if (movies.isEmpty) {
+                        return Center(
+                            child: Image.asset("assets/images/empty.png"));
+                      }
+
+                      return GridView.builder(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            childAspectRatio: 2 / 3,
+                          ),
+                          itemCount: movies.length,
+                          itemBuilder: (context, index) {
+                            final movie = movies[index];
+                            return MovieCard(
+                              title: movie.title ?? "Unknown Title",
+                              imagePath: movie.posterPath != null
+                                  ? "https://image.tmdb.org/t/p/w500${movie
+                                  .posterPath}"
+                                  : "assets/images/empty.png", // Fallback image
+                              rating: movie.voteAverage!,
+                              movieId: movies[index].id!,
+                            );
+                          },
+                        );
+                    }
+                    )
+    ),
               ),
           ],
         ),

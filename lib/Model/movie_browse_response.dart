@@ -1,12 +1,12 @@
-class SearchResponse {
+class movieResponse {
   int? page;
   List<Results>? results;
   int? totalPages;
   int? totalResults;
 
-  SearchResponse({this.page, this.results, this.totalPages, this.totalResults});
+  movieResponse({this.page, this.results, this.totalPages, this.totalResults});
 
-  SearchResponse.fromJson(Map<String, dynamic> json) {
+  movieResponse.fromJson(Map<String, dynamic> json) {
     page = json['page'];
     if (json['results'] != null) {
       results = <Results>[];
@@ -18,16 +18,16 @@ class SearchResponse {
     totalResults = json['total_results'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['page'] = this.page;
-    if (this.results != null) {
-      data['results'] = this.results!.map((v) => v.toJson()).toList();
-    }
-    data['total_pages'] = this.totalPages;
-    data['total_results'] = this.totalResults;
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['page'] = this.page;
+  //   if (this.results != null) {
+  //     data['results'] = this.results!.map((v) => v.toJson()).toList();
+  //   }
+  //   data['total_pages'] = this.totalPages;
+  //   data['total_results'] = this.totalResults;
+  //   return data;
+  // }
 }
 
 class Results {
@@ -79,22 +79,22 @@ class Results {
     voteCount = json['vote_count'];
   }
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['adult'] = this.adult;
-    data['backdrop_path'] = this.backdropPath;
-    data['genre_ids'] = this.genreIds;
-    data['id'] = this.id;
-    data['original_language'] = this.originalLanguage;
-    data['original_title'] = this.originalTitle;
-    data['overview'] = this.overview;
-    data['popularity'] = this.popularity;
-    data['poster_path'] = this.posterPath;
-    data['release_date'] = this.releaseDate;
-    data['title'] = this.title;
-    data['video'] = this.video;
-    data['vote_average'] = this.voteAverage;
-    data['vote_count'] = this.voteCount;
-    return data;
-  }
+  // Map<String, dynamic> toJson() {
+  //   final Map<String, dynamic> data = new Map<String, dynamic>();
+  //   data['adult'] = this.adult;
+  //   data['backdrop_path'] = this.backdropPath;
+  //   data['genre_ids'] = this.genreIds;
+  //   data['id'] = this.id;
+  //   data['original_language'] = this.originalLanguage;
+  //   data['original_title'] = this.originalTitle;
+  //   data['overview'] = this.overview;
+  //   data['popularity'] = this.popularity;
+  //   data['poster_path'] = this.posterPath;
+  //   data['release_date'] = this.releaseDate;
+  //   data['title'] = this.title;
+  //   data['video'] = this.video;
+  //   data['vote_average'] = this.voteAverage;
+  //   data['vote_count'] = this.voteCount;
+  //   return data;
+  // }
 }

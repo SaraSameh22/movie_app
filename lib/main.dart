@@ -8,6 +8,9 @@ import 'package:movies/onboarding_screen.dart';
 import 'package:movies/Registeration/register_screen.dart';
 import 'package:movies/splash_screen.dart';
 import 'package:provider/provider.dart';
+import 'package:movies/Taps/profile_update_screen.dart';
+
+
 
 
 void main() {
@@ -55,6 +58,7 @@ class MyApp extends StatelessWidget {
         RegisterScreen.routeName: (context) => RegisterScreen(),
         ForgotPasswordScreen.routeName: (context) => ForgotPasswordScreen(),
         HomeScreen.routName : (context)=>HomeScreen(),
+        UpdateProfileScreen.routName :(context)=>UpdateProfileScreen(),
       },
         );
       },

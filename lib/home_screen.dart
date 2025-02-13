@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/Taps/browse_tap.dart';
 import 'package:movies/Taps/home_tap.dart';
+import 'package:movies/Taps/profile_test_tap.dart';
 import 'package:movies/Taps/search_tap.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -19,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     HomeTap(),
     SearchTab(),
     BrowseTap(),
-    Screen4(),
+    ProfileScreen()
   ];
 
   void _onItemTapped(int index) {
@@ -70,17 +71,17 @@ class _HomeScreenState extends State<HomeScreen> {
 
 
 
-class Screen4 extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.blueAccent,
-      body: Center(
-        child: Text("Profile Screen", style: TextStyle(fontSize: 24, color: Colors.white)),
-      ),
-    );
-  }
-}
+// class Screen4 extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       backgroundColor: Colors.blueAccent,
+//       body: Center(
+//         child: Text("Profile Screen", style: TextStyle(fontSize: 24, color: Colors.white)),
+//       ),
+//     );
+//   }
+// }
 
 
 

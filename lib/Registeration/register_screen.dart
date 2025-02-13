@@ -291,7 +291,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 child: Stack(
                 children: [
-                // Background for the active side
                 AnimatedAlign(
                 duration: Duration(milliseconds: 300),
                 curve: Curves.easeInOut,
