@@ -5,6 +5,8 @@ import 'package:movies/Model/screenshot_response.dart';
 import 'package:movies/Model/similar_response.dart';
 import 'package:movies/api_manager.dart';
 import 'package:movies/movie_card.dart';
+import 'package:movies/profile_manager.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class MovieDetailsScreen extends StatefulWidget {
   final int movieId;
@@ -15,6 +17,19 @@ class MovieDetailsScreen extends StatefulWidget {
 }
 
 class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
+  bool isMarked = false;
+  @override
+  void initState() {
+    super.initState();
+    _loadBookMarkState();
+  }
+  Future<void>_loadBookMarkState()async{
+    bool isBookmarked = await profileManager.isMovieBookmarked(widget.movieId);
+    setState(() {
+      isMarked = isBookmarked;
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -57,15 +72,36 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                       Positioned(
                         top: 20,
                         right: 20,
-                        child: Icon(
-                          Icons.bookmark_border,
-                          color: Colors.white,
-                          size: 30,
+                        child: GestureDetector(
+                          onTap: ()async{
+                            final bool newState = !isMarked;
+                            setState(() {
+                              isMarked = newState;
+                            });
+
+                            if (newState) {
+                             await profileManager.addToWatchList(
+                                  movieId: movieData.id! ,
+                                  name: movieData.title! ,
+                                  posterPath : "https://image.tmdb.org/t/p/original/${movieData.posterPath ?? ''}",
+                                  rating: movieData.voteAverage! ,
+                                  year: movieData.releaseDate.toString()
+                              );
+                            } else {
+                             await profileManager.deleteWatchListMovie(widget.movieId );
+                            }
+                            },
+                          child: Icon(
+                           isMarked ? Icons.bookmark : Icons.bookmark_border  ,
+                            color: Colors.white,
+                            size: 30,
+                          ),
                         ),
                       ),
                       Positioned(
-                        bottom: 50,
-                        child: Column(children: [
+                        bottom: 80,
+                        child: Column(
+                            children: [
                           Text(
                             movieData.title ?? "",
                             style: TextStyle(
@@ -76,9 +112,9 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                           Text(
                             movieData.releaseDate!.substring(0, 4) ?? "",
                             style: TextStyle(
-                                fontSize: 24,
+                                fontSize: 20,
                                 fontWeight: FontWeight.bold,
-                                color: Colors.white),
+                                color: Color(0XFFADADAD)),
                           ),
                         ]),
                       ),
@@ -229,10 +265,10 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                 FutureBuilder<similarResponse>(
                   future: ApiManager.getSimilarMovies(widget.movieId),
                   builder: (context, snapshot) {
-                    print(
-                        "FutureBuilder Triggered: ${snapshot.connectionState}");
-                    print("Has Data: ${snapshot.hasData}");
-                    print("Error: ${snapshot.error}");
+                    // print(
+                    //     "FutureBuilder Triggered: ${snapshot.connectionState}");
+                    // print("Has Data: ${snapshot.hasData}");
+                    // print("Error: ${snapshot.error}");
 
                     if (!snapshot.hasData) {
                       return const Center(
@@ -256,7 +292,7 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
                     }
 
                     final movies = snapshot.data!.results;
-                    print("Movies Retrieved: $movies");
+                    // print("Movies Retrieved: $movies");
                     if (movies == null || movies.isEmpty) {
                       return const Center(child: Text("No movies available"));
                     }
@@ -433,3 +469,5 @@ class _MovieDetailsScreenState extends State<MovieDetailsScreen> {
   Widget _errorText(String error) =>
       Center(child: Text(error, style: TextStyle(color: Colors.white)));
 }
+
+

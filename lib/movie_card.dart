@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:movies/Provider/history_provider.dart';
 import 'package:movies/movie_details_screen.dart';
+import 'package:movies/profile_manager.dart';
+import 'package:provider/provider.dart';
 
 class MovieCard extends StatelessWidget {
   final String title;
@@ -19,12 +22,21 @@ class MovieCard extends StatelessWidget {
     return
       GestureDetector(
         onTap:  () {
+          final movie = Movie(
+            id: movieId,
+            title: title,
+            imagePath: imagePath,
+            rating: rating,
+          );
+          Provider.of<HistoryManager>(context, listen: false).addToHistory(movie);
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => MovieDetailsScreen(movieId: movieId),
             ),
           );
+
+          // profileManager.addToHistory(movieId);
         },
         child: Stack(
         children: [

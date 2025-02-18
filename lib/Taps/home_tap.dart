@@ -15,12 +15,11 @@ class HomeTap extends StatefulWidget {
 }
 
 class _HomeTapState extends State<HomeTap> {
-   // late  Future<popularResponse> popularMovies;
-  final PageController _controller = PageController();
+
+  // final PageController _controller = PageController();
 
   @override
   void initState() {
-    // popularMovies = ApiManager.getPopular();
     super.initState();
   }
 

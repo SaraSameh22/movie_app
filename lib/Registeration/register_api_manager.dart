@@ -1,16 +1,11 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterApi {
   final String baseUrl = "https://route-movie-apis.vercel.app";
 
-  Future<Map<String, dynamic>> registerUser(
-      String name,
-      String email,
-      String password,
-      String confirmPassword,
-      String phone,
-      int avaterId) async {
+  Future<Map<String, dynamic>> registerUser(String name, String email, String password, String confirmPassword, String phone, int avaterId) async {
     final Uri url = Uri.parse("$baseUrl/auth/register");
     try {
       final response = await http.post(
@@ -64,12 +59,24 @@ class RegisterApi {
         }),
       );
 
-
       if (response.statusCode == 200) {
+        final responseData = jsonDecode(response.body);
+        final token = responseData["data"]; // Token is stored in the "data" field
+
+        if (token != null) {
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          await prefs.remove('auth_token');
+          await prefs.setString('auth_token', token);
+
+          print("✅ Login successful. New token saved.");
+        } else {
+          print("⚠️ Warning: No token received from API.");
+        }
+
         return {
           "success": true,
-          "message": "Login successful!",
-          "data": jsonDecode(response.body),
+          "message": responseData["message"],
+          "data": token,
         };
       } else {
         return {
@@ -84,4 +91,8 @@ class RegisterApi {
       };
     }
   }
+
+
+
+
 }

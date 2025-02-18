@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:movies/Provider/history_provider.dart';
 import 'package:movies/Provider/language_provider.dart';
 import 'package:movies/Registeration/forgetpassword_screen.dart';
 import 'package:movies/Registeration/login_screen.dart';
@@ -17,6 +18,7 @@ void main() {
   runApp( MultiProvider(
     providers: [
       ChangeNotifierProvider(create: (_) => LanguageProvider()),
+      ChangeNotifierProvider(create: (_) => HistoryManager()),
     ],
     child: MyApp(),
   ),

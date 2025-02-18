@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/Taps/browse_tap.dart';
 import 'package:movies/Taps/home_tap.dart';
-import 'package:movies/Taps/profile_test_tap.dart';
+import 'package:movies/Taps/profile_tap.dart';
 import 'package:movies/Taps/search_tap.dart';
 
 class HomeScreen extends StatefulWidget {

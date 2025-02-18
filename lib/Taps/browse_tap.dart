@@ -65,9 +65,9 @@ class _BrowseTapState extends State<BrowseTap> {
             FutureBuilder<movieResponse>(
                   future: ApiManager.getMovies(genreId: source.id),
                   builder: (context, snapshot) {
-                    print("FutureBuilder Triggered: ${snapshot.connectionState}");
-                    print("Has Data: ${snapshot.hasData}");
-                    print("Error: ${snapshot.error}");
+                    // print("FutureBuilder Triggered: ${snapshot.connectionState}");
+                    // print("Has Data: ${snapshot.hasData}");
+                    // print("Error: ${snapshot.error}");
 
                     if (!snapshot.hasData) {
                       return const Center(
@@ -84,7 +84,7 @@ class _BrowseTapState extends State<BrowseTap> {
                     }
 
                     final movies = snapshot.data!.results;
-                    print("Movies Retrieved: $movies");
+                    // print("Movies Retrieved: $movies");
                     if (movies == null || movies.isEmpty) {
                       return const Center(child: Text("No movies available"));
                     }

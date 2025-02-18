@@ -22,7 +22,7 @@ class ApiManager {
         },
       );
       if (response.statusCode == 200) {
-        print("Response: ${response.body}");
+        // print("Category Response: ${response.body}");
       } else {
         print("Error: ${response.statusCode} - ${response.reasonPhrase}");
       }
@@ -34,7 +34,6 @@ class ApiManager {
     categoriesResponse category = categoriesResponse.fromJson(json);
     return category;
   }
-
 
   static Future<movieResponse> getMovies({int? genreId}) async {
     Uri url = Uri.parse("https://api.themoviedb.org/3/discover/movie?with_genres=$genreId&api_key=7844ed77e021c66cba973afe4f77066d");
@@ -48,7 +47,7 @@ class ApiManager {
       );
 
       if (response.statusCode == 200) {
-        print("Response of movies from genres: ${response.body}");
+        // print("Response of movies from genres: ${response.body} ");
       } else {
         print("Error: ${response.statusCode} - ${response.reasonPhrase}");
       }
@@ -64,8 +63,6 @@ class ApiManager {
     return movies;
   }
 
-
-
   static Future<SearchResponse> searchMovies(String query) async {
     Uri url = Uri.https("api.themoviedb.org", "/3/search/movie", {
       "api_key": "7844ed77e021c66cba973afe4f77066d",
@@ -79,7 +76,7 @@ class ApiManager {
       );
 
       if (response.statusCode == 200) {
-        print(" Search Response: ${response.body}");
+        // print(" Search Response: ${response.body} ");
       } else {
         print("Error: ${response.statusCode} - ${response.reasonPhrase}");
       }
@@ -95,7 +92,6 @@ class ApiManager {
     return searchRes;
   }
 
-
   static Future<popularResponse> getPopular() async {
     Uri url = Uri.parse("https://api.themoviedb.org/3/movie/popular?api_key=7844ed77e021c66cba973afe4f77066d");
     try {
@@ -107,7 +103,7 @@ class ApiManager {
       );
 
       if (response.statusCode == 200) {
-        print("Response: ${response.body}");
+        // print("Popular Response: ${response.body}");
       } else {
         print("Error: ${response.statusCode} - ${response.reasonPhrase}");
       }
@@ -123,7 +119,6 @@ class ApiManager {
     return popular;
   }
 
-
   static Future<upcomingResponse> getUpcoming() async {
     Uri url = Uri.parse("https://api.themoviedb.org/3/movie/upcoming?api_key=7844ed77e021c66cba973afe4f77066d");
     try {
@@ -135,7 +130,7 @@ class ApiManager {
       );
 
       if (response.statusCode == 200) {
-        print("Response: ${response.body}");
+        // print("Upcoming Response: ${response.body} ");
       } else {
         print("Error: ${response.statusCode} - ${response.reasonPhrase}");
       }
@@ -165,7 +160,7 @@ class ApiManager {
       );
 
       if (response.statusCode == 200) {
-        print("Movie Details Response: ${response.body}");
+        // print("Movie Details Response: ${response.body}");
         return movieDetailsResponse.fromJson(json.decode(response.body));
       } else {
         print("Error: ${response.statusCode} - ${response.reasonPhrase}");
@@ -190,7 +185,7 @@ class ApiManager {
       );
 
       if (response.statusCode == 200) {
-        print("Movie Details Response: ${response.body}");
+        // print("Similar Movies Response: ${response.body} ");
         return similarResponse.fromJson(json.decode(response.body));
       } else {
         print("Error: ${response.statusCode} - ${response.reasonPhrase}");
@@ -216,7 +211,7 @@ class ApiManager {
       );
 
       if (response.statusCode == 200) {
-        print("Movie Cast Response: ${response.body}");
+        // print("Movie Cast Response: ${response.body}");
         return castResponse.fromJson(json.decode(response.body));
       } else {
         print("Error: ${response.statusCode} - ${response.reasonPhrase}");
@@ -227,7 +222,6 @@ class ApiManager {
       throw Exception("Failed to fetch movie details: $e");
     }
   }
-
 
   static Future<screenshotResponse> getScreenShots(int movieId) async {
     Uri url = Uri.parse(
@@ -243,7 +237,7 @@ class ApiManager {
       );
 
       if (response.statusCode == 200) {
-        print("Movie Cast Response: ${response.body}");
+        // print("Movie Screen Shot Response: ${response.body}");
         return screenshotResponse.fromJson(json.decode(response.body));
       } else {
         print("Error: ${response.statusCode} - ${response.reasonPhrase}");

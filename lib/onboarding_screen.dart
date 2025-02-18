@@ -23,7 +23,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 buildPoster(
                   imagePath: 'assets/images/onboarding1.png',
                   title: 'Find Your Next\n Favorite Movie Here',
-                  description: 'Get access to a huge library of movies\n to suit all tastes. you will surely like it',
+                  description:
+                      'Get access to a huge library of movies\n to suit all tastes. you will surely like it',
                   buttonText: 'Explore Now',
                   buttonAction: () => _controller.nextPage(
                     duration: Duration(milliseconds: 300),
@@ -31,86 +32,84 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
                 ),
                 buildPage(
-                  imagePath: 'assets/images/onboarding2.png',
-                  title: 'Discover Movies',
-                  description: 'Explore a vast collection of movies in all qualities and genres  Find your next favorite film with ease.',
-                  buttonText: 'Next',
-                  buttonAction: () => _controller.nextPage(
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                  ),
+                    imagePath: 'assets/images/onboarding2.png',
+                    title: 'Discover Movies',
+                    description:
+                        'Explore a vast collection of movies in all qualities and genres  Find your next favorite film with ease.',
+                    buttonText: 'Next',
+                    buttonAction: () => _controller.nextPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        ),
                     buttonText2: 'Back',
-                  buttonAction2: ()=> _controller.previousPage(
-                    duration: Duration(microseconds: 300),
-                    curve: Curves.easeInOut,
-                  )
-                ),
+                    buttonAction2: () => _controller.previousPage(
+                          duration: Duration(microseconds: 300),
+                          curve: Curves.easeInOut,
+                        )),
                 buildPage(
-                  imagePath: 'assets/images/onboarding3.png',
-                  title: 'Explore All Genres',
-                  description: 'Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.',
-                  buttonText: 'Next',
-                  buttonAction: () => _controller.nextPage(
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                  ),
+                    imagePath: 'assets/images/onboarding3.png',
+                    title: 'Explore All Genres',
+                    description:
+                        'Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.',
+                    buttonText: 'Next',
+                    buttonAction: () => _controller.nextPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        ),
                     buttonText2: 'Back',
-                    buttonAction2: ()=> _controller.previousPage(
-                      duration: Duration(microseconds: 300),
-                      curve: Curves.easeInOut,
-                    )
-                ),
+                    buttonAction2: () => _controller.previousPage(
+                          duration: Duration(microseconds: 300),
+                          curve: Curves.easeInOut,
+                        )),
                 buildPage(
-                  imagePath: 'assets/images/onboarding4.png',
-                  title: 'Create Watchlists',
-                  description: 'Save movies to your watchlist to keep track of what you want to watch next.',
-                  buttonText: 'Next',
-                  buttonAction: () => _controller.nextPage(
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                  ),
+                    imagePath: 'assets/images/onboarding4.png',
+                    title: 'Create Watchlists',
+                    description:
+                        'Save movies to your watchlist to keep track of what you want to watch next.',
+                    buttonText: 'Next',
+                    buttonAction: () => _controller.nextPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        ),
                     buttonText2: 'Back',
-                    buttonAction2: ()=> _controller.previousPage(
-                      duration: Duration(microseconds: 300),
-                      curve: Curves.easeInOut,
-                    )
-                ),
+                    buttonAction2: () => _controller.previousPage(
+                          duration: Duration(microseconds: 300),
+                          curve: Curves.easeInOut,
+                        )),
                 buildPage(
-                  imagePath: 'assets/images/onboarding5.png',
-                  title: 'Rate, Review, and Learn',
-                  description: 'Share your thoughts and discover great movies with your reviews.',
-                  buttonText: 'Next',
-                  buttonAction: () => _controller.nextPage(
-                    duration: Duration(milliseconds: 300),
-                    curve: Curves.easeInOut,
-                  ),
+                    imagePath: 'assets/images/onboarding5.png',
+                    title: 'Rate, Review, and Learn',
+                    description:
+                        'Share your thoughts and discover great movies with your reviews.',
+                    buttonText: 'Next',
+                    buttonAction: () => _controller.nextPage(
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        ),
                     buttonText2: 'Back',
-                    buttonAction2: ()=> _controller.previousPage(
-                      duration: Duration(microseconds: 300),
-                      curve: Curves.easeInOut,
-                    )
-                ),
-            buildPage(
-              imagePath: 'assets/images/onboarding6.png',
-              title: 'Start Watching Now',
-              description: '',
-              buttonText: 'Finish',
-              buttonAction: (){
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => LoginScreen()),
-                );
-              },
-                buttonText2: 'Back',
-                buttonAction2: ()=> _controller.previousPage(
-                  duration: Duration(microseconds: 300),
-                  curve: Curves.easeInOut,
-                )
-            ),
+                    buttonAction2: () => _controller.previousPage(
+                          duration: Duration(microseconds: 300),
+                          curve: Curves.easeInOut,
+                        )),
+                buildPage(
+                    imagePath: 'assets/images/onboarding6.png',
+                    title: 'Start Watching Now',
+                    description: '',
+                    buttonText: 'Finish',
+                    buttonAction: () {
+                      Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                      );
+                    },
+                    buttonText2: 'Back',
+                    buttonAction2: () => _controller.previousPage(
+                          duration: Duration(microseconds: 300),
+                          curve: Curves.easeInOut,
+                        )),
               ],
             ),
           ),
-
         ],
       ),
     );
@@ -124,25 +123,23 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     required String buttonText2,
     required VoidCallback buttonAction,
     required VoidCallback buttonAction2,
-  })
-
-  {
+  }) {
     return Container(
-      padding: EdgeInsets.only(top:520),
+      padding: EdgeInsets.only(top: 520),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(imagePath),
           fit: BoxFit.cover,
-          colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken),
+          colorFilter:
+              ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken),
         ),
       ),
-      child:
-      Container(
+      child: Container(
         padding: EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
-          color: Colors.black,
-        borderRadius: BorderRadius.only(topRight: Radius.circular(40 ) , topLeft:  Radius.circular(40))
-        ),
+            color: Colors.black,
+            borderRadius: BorderRadius.only(
+                topRight: Radius.circular(40), topLeft: Radius.circular(40))),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -162,7 +159,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white70,
-                fontSize:20,
+                fontSize: 20,
               ),
             ),
             SizedBox(height: 8),
@@ -176,11 +173,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
-                  child: Text(
-                    buttonText,
-                    style: TextStyle(color: Colors.black),
-                  ),
+                child: Text(
+                  buttonText,
+                  style: TextStyle(color: Colors.black),
                 ),
+              ),
             ),
             SizedBox(height: 8),
             SizedBox(
@@ -190,12 +187,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 style: ElevatedButton.styleFrom(
                   side: BorderSide(
                     color: Color(0XFFF6BD00), // Border color
-                    width: 2,           // Border width
+                    width: 2, // Border width
                   ),
                   backgroundColor: Colors.black,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
-
                   ),
                 ),
                 child: Text(
@@ -212,9 +208,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 }
 
-
-
-
 Widget buildPoster({
   required String imagePath,
   required String title,
@@ -228,7 +221,8 @@ Widget buildPoster({
       image: DecorationImage(
         image: AssetImage(imagePath),
         fit: BoxFit.cover,
-        colorFilter: ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken),
+        colorFilter:
+            ColorFilter.mode(Colors.black.withOpacity(0.5), BlendMode.darken),
       ),
     ),
     child: Column(

@@ -22,6 +22,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
     'assets/images/gamer1.png',
     'assets/images/gamer2.png',
     'assets/images/gamer3.png',
+    'assets/images/gamer4.png',
+    'assets/images/gamer5.png',
+    'assets/images/gamer6.png',
+    'assets/images/gamer7.png',
+    'assets/images/gamer8.png',
+    'assets/images/gamer9.png',
   ];
 
   int selectedAvatarIndex = 0;

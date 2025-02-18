@@ -6,6 +6,10 @@ import 'package:movies/Registeration/register_api_manager.dart';
 import 'package:movies/home_screen.dart';
 import 'package:movies/Registeration/register_screen.dart';
 import 'package:provider/provider.dart';
+import 'dart:convert';
+
+import 'package:shared_preferences/shared_preferences.dart';
+
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = "LoginScreen";
@@ -17,7 +21,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _isObscure = true;
-
   final _formKey = GlobalKey<FormState>();
   final _apiLog = RegisterApi();
 
@@ -39,12 +42,35 @@ class _LoginScreenState extends State<LoginScreen> {
       _isLoading = false;
     });
 
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(response["message"]),
-        backgroundColor: response["success"] ? Colors.green : Colors.red,
-      ),
-    );
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('auth_token');
+
+
+    if (token != null) {
+      await prefs.setBool('isLoggedIn', true);
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Login successful"),
+          backgroundColor: Colors.green,
+        ),
+      );
+      Navigator.pushReplacementNamed(context, HomeScreen.routName);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Login failed"),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+
+    // ScaffoldMessenger.of(context).showSnackBar(
+    //   SnackBar(
+    //     content: Text(response["message"]),
+    //     backgroundColor: response["success"] ? Colors.green : Colors.red,
+    //   ),
+    // );
 
     if (_formKey.currentState!.validate()) {
       _formKey.currentState!.save();
@@ -52,14 +78,15 @@ class _LoginScreenState extends State<LoginScreen> {
       print("Password: $_password");
 
     }
+    // if (response["success"]) {
+    //   // Navigator.pushReplacement(
+    //   //   context,
+    //   //   MaterialPageRoute(builder: (context) => HomeScreen()),
+    //   // );
+    //   Navigator.pushNamed(context, HomeScreen.routName);
+    // }
 
-    if (response["success"]) {
-      // Navigator.pushReplacement(
-      //   context,
-      //   MaterialPageRoute(builder: (context) => HomeScreen()),
-      // );
-      Navigator.pushNamed(context, HomeScreen.routName);
-    }
+
   }
 
 
