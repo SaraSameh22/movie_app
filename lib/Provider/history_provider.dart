@@ -14,9 +14,6 @@ class Movie {
   });
 }
 
-
-
-
 class HistoryManager with ChangeNotifier {
   final List<Movie> _history = [];
 

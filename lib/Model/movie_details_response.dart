@@ -28,43 +28,43 @@ class movieDetailsResponse {
 
   movieDetailsResponse(
       {this.adult,
-        this.backdropPath,
-        this.belongsToCollection,
-        this.budget,
-        this.genres,
-        this.homepage,
-        this.id,
-        this.imdbId,
-        this.originCountry,
-        this.originalLanguage,
-        this.originalTitle,
-        this.overview,
-        this.popularity,
-        this.posterPath,
-        this.productionCompanies,
-        this.productionCountries,
-        this.releaseDate,
-        this.revenue,
-        this.runtime,
-        this.spokenLanguages,
-        this.status,
-        this.tagline,
-        this.title,
-        this.video,
-        this.voteAverage,
-        this.voteCount});
+      this.backdropPath,
+      this.belongsToCollection,
+      this.budget,
+      this.genres,
+      this.homepage,
+      this.id,
+      this.imdbId,
+      this.originCountry,
+      this.originalLanguage,
+      this.originalTitle,
+      this.overview,
+      this.popularity,
+      this.posterPath,
+      this.productionCompanies,
+      this.productionCountries,
+      this.releaseDate,
+      this.revenue,
+      this.runtime,
+      this.spokenLanguages,
+      this.status,
+      this.tagline,
+      this.title,
+      this.video,
+      this.voteAverage,
+      this.voteCount});
 
   movieDetailsResponse.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
     backdropPath = json['backdrop_path'];
     belongsToCollection = json['belongs_to_collection'] != null
-        ? new BelongsToCollection.fromJson(json['belongs_to_collection'])
+        ? BelongsToCollection.fromJson(json['belongs_to_collection'])
         : null;
     budget = json['budget'];
     if (json['genres'] != null) {
       genres = <Genres>[];
       json['genres'].forEach((v) {
-        genres!.add(new Genres.fromJson(v));
+        genres!.add(Genres.fromJson(v));
       });
     }
     homepage = json['homepage'];
@@ -79,13 +79,13 @@ class movieDetailsResponse {
     if (json['production_companies'] != null) {
       productionCompanies = <ProductionCompanies>[];
       json['production_companies'].forEach((v) {
-        productionCompanies!.add(new ProductionCompanies.fromJson(v));
+        productionCompanies!.add(ProductionCompanies.fromJson(v));
       });
     }
     if (json['production_countries'] != null) {
       productionCountries = <ProductionCountries>[];
       json['production_countries'].forEach((v) {
-        productionCountries!.add(new ProductionCountries.fromJson(v));
+        productionCountries!.add(ProductionCountries.fromJson(v));
       });
     }
     releaseDate = json['release_date'];
@@ -94,7 +94,7 @@ class movieDetailsResponse {
     if (json['spoken_languages'] != null) {
       spokenLanguages = <SpokenLanguages>[];
       json['spoken_languages'].forEach((v) {
-        spokenLanguages!.add(new SpokenLanguages.fromJson(v));
+        spokenLanguages!.add(SpokenLanguages.fromJson(v));
       });
     }
     status = json['status'];
@@ -120,8 +120,6 @@ class BelongsToCollection {
     posterPath = json['poster_path'];
     backdropPath = json['backdrop_path'];
   }
-
-
 }
 
 class Genres {
@@ -134,8 +132,6 @@ class Genres {
     id = json['id'];
     name = json['name'];
   }
-
-
 }
 
 class ProductionCompanies {
@@ -152,8 +148,6 @@ class ProductionCompanies {
     name = json['name'];
     originCountry = json['origin_country'];
   }
-
-
 }
 
 class ProductionCountries {
@@ -166,7 +160,6 @@ class ProductionCountries {
     iso31661 = json['iso_3166_1'];
     name = json['name'];
   }
-
 }
 
 class SpokenLanguages {
@@ -181,10 +174,4 @@ class SpokenLanguages {
     iso6391 = json['iso_639_1'];
     name = json['name'];
   }
-
-
 }
-
-
-
-

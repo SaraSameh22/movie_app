@@ -7,11 +7,11 @@ import 'package:movies/Taps/profile_update_screen.dart';
 import 'package:movies/movie_card.dart';
 import 'package:movies/profile_manager.dart';
 import 'package:provider/provider.dart';
-import 'dart:io';
-import 'package:flutter/services.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileScreen extends StatefulWidget {
+  const ProfileScreen({super.key});
+
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
 }
@@ -19,12 +19,51 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   bool isWatchListSelected = true;
 
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+  Future<bool> _showExitDialog(BuildContext context) async {
+    return await showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            backgroundColor: const Color(0XFF282A28),
+            title: const Text(
+              "Confirm Exit",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700),
+            ),
+            content: const Text(
+              "Are you sure you want to Exit?",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                  fontWeight: FontWeight.w700),
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(false),
+                child: const Text(
+                  "Cancel",
+                  style: TextStyle(
+                      color: Color(0XFFF6BD00),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(true),
+                child: const Text(
+                  "Logout",
+                  style: TextStyle(
+                      color: Color(0XFFE82626),
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700),
+                ),
+              ),
+            ],
+          ),
+        ) ??
+        false;
   }
-
 
   @override
   void initState() {
@@ -47,12 +86,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Widget _buildProfileHeader() {
     return Container(
-      padding: EdgeInsets.all(16.0),
-      color: Color(0XFF212121),
+      padding: const EdgeInsets.all(16.0),
+      color: const Color(0XFF212121),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -62,7 +101,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     future: profileManager.getProfile(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return Center(
+                        return const Center(
                             child: Text("Error loading profile",
                                 style: TextStyle(color: Colors.white)));
                       }
@@ -75,29 +114,29 @@ class _ProfileScreenState extends State<ProfileScreen> {
                               "assets/images/gamer${avatarId + 1}.png"),
                         );
                       }
-                      return Center(
+                      return const Center(
                           child: Text("No data available",
                               style: TextStyle(color: Colors.white)));
                     },
                   ),
-                  SizedBox(height: 8),
+                  const SizedBox(height: 8),
                   FutureBuilder<profileResponse?>(
                     future: profileManager.getProfile(),
                     builder: (context, snapshot) {
                       if (snapshot.hasError) {
-                        return Center(
+                        return const Center(
                             child: Text("Error loading profile",
                                 style: TextStyle(color: Colors.white)));
                       }
                       if (snapshot.hasData && snapshot.data?.data != null) {
                         String username = snapshot.data!.data!.name ?? "Guest";
-                        return Text("$username",
-                            style: TextStyle(
+                        return Text(username,
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 20,
                                 fontWeight: FontWeight.w700));
                       }
-                      return Center(
+                      return const Center(
                           child: Text("No data available",
                               style: TextStyle(color: Colors.white)));
                     },
@@ -108,34 +147,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   FutureBuilder<watchListResponse>(
-                    future: profileManager.getWatchList(), // Call your function here
+                    future: profileManager.getWatchList(),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
-                        return Text("...");
-                      } else if (snapshot.hasError){
-                        return Text("Error");
-                      }else if (snapshot.hasData) {
-                        List<watchlistModel.Data>? watchlist = snapshot.data?.data;
-                        print("${watchlist?.length}");
-                        return Text("${watchlist?.length}" ,
+                        return const Text(
+                          "...",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 36,
-                              fontWeight: FontWeight.w700),);
+                              fontWeight: FontWeight.w700),
+                        );
+                      } else if (snapshot.hasError) {
+                        return const Text(
+                          "Error",
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 36,
+                              fontWeight: FontWeight.w700),
+                        );
+                      } else if (snapshot.hasData) {
+                        List<watchlistModel.Data>? watchlist =
+                            snapshot.data?.data;
+                        print("${watchlist?.length}");
+                        return Text(
+                          "${watchlist?.length}",
+                          style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 36,
+                              fontWeight: FontWeight.w700),
+                        );
                       } else {
-                        return Text("0");
+                        return const Text("0");
                       }
                     },
                   ),
-                  SizedBox(height: 8),
-                  Text("Wish List",
+                  const SizedBox(height: 8),
+                  const Text("Watch List",
                       style: TextStyle(
                           color: Colors.white,
                           fontSize: 24,
                           fontWeight: FontWeight.w700)),
                 ],
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Consumer<HistoryManager>(
                 builder: (context, historyManager, child) {
                   return Column(
@@ -143,13 +197,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     children: [
                       Text(
                         "${historyManager.history.length}", // Use history length
-                        style: TextStyle(
+                        style: const TextStyle(
                             color: Colors.white,
                             fontSize: 36,
                             fontWeight: FontWeight.w700),
                       ),
-                      SizedBox(height: 8),
-                      Text("History",
+                      const SizedBox(height: 8),
+                      const Text("History",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 24,
@@ -160,18 +214,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             children: [
               Expanded(
                 flex: 2,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0XFFF6BD00),
+                    backgroundColor: const Color(0XFFF6BD00),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15), // Border radius
                     ),
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                         vertical: 16, horizontal: 24), // Text padding
                   ),
                   onPressed: () async {
@@ -179,7 +233,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     bool? updated = await Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => UpdateProfileScreen()),
+                          builder: (context) => const UpdateProfileScreen()),
                     );
 
                     if (updated == true) {
@@ -189,28 +243,35 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       });
                     }
                   },
-                  child: Text("Edit Profile",
+                  child: const Text("Edit Profile",
                       style: TextStyle(color: Colors.black, fontSize: 20)),
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Expanded(
                 flex: 1,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0XFFE82626),
+                    backgroundColor: const Color(0XFFE82626),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15), // Border radius
                     ),
-                    padding: EdgeInsets.symmetric(
+                    padding: const EdgeInsets.symmetric(
                         vertical: 16, horizontal: 24), // Text padding
                   ),
-                  onPressed: () {
-                    if (Platform.isAndroid) {
-                      SystemNavigator.pop(); // For Android
+                  onPressed: () async {
+                    bool confirmExit = await _showExitDialog(context);
+
+                    if (confirmExit) {
+                      final SharedPreferences prefs =
+                          await SharedPreferences.getInstance();
+                      await prefs.remove('auth_token');
+
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, "LoginScreen", (route) => false);
                     }
                   },
-                  child: Row(
+                  child: const Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Text("Exit",
@@ -225,7 +286,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ],
           ),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -250,12 +311,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
         children: [
           Icon(icon,
               color: isWatchListSelected == isSelected
-                  ? Color(0XFFF6BD00)
+                  ? const Color(0XFFF6BD00)
                   : Colors.white),
           Text(label,
               style: TextStyle(
                   color: isWatchListSelected == isSelected
-                      ? Color(0XFFF6BD00)
+                      ? const Color(0XFFF6BD00)
                       : Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.w700)),
@@ -263,7 +324,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             height: 3,
             width: 80,
             color: isWatchListSelected == isSelected
-                ? Color(0XFFF6BD00)
+                ? const Color(0XFFF6BD00)
                 : Colors.transparent,
           )
         ],
@@ -279,8 +340,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Consumer<HistoryManager>(
       builder: (context, historyManager, child) {
         return GridView.builder(
-          padding: EdgeInsets.all(8.0),
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          padding: const EdgeInsets.all(8.0),
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             childAspectRatio: 0.7,
             crossAxisSpacing: 8.0,
@@ -325,13 +386,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
         }
 
         return GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 3,
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
             childAspectRatio: 2 / 3,
           ),
-          itemCount: watchlist!.length,
+          itemCount: watchlist.length,
           itemBuilder: (context, index) {
             return MovieCard(
               title: watchlist[index].name!,

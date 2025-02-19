@@ -4,6 +4,8 @@ import 'package:movies/api_manager.dart';
 import 'package:movies/movie_card.dart';
 
 class SearchTab extends StatefulWidget {
+  const SearchTab({super.key});
+
   @override
   _SearchTabState createState() => _SearchTabState();
 }
@@ -24,11 +26,12 @@ class _SearchTabState extends State<SearchTab> {
           children: [
             TextField(
               controller: _searchController,
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
                 hintText: "Search",
-                hintStyle: TextStyle(color: Colors.grey),
-                prefixIcon: ImageIcon(AssetImage('assets/images/search.png'), color: Colors.white),
+                hintStyle: const TextStyle(color: Colors.grey),
+                prefixIcon: const ImageIcon(AssetImage('assets/images/search.png'),
+                    color: Colors.white),
                 filled: true,
                 fillColor: Colors.grey[900],
                 border: OutlineInputBorder(
@@ -36,36 +39,35 @@ class _SearchTabState extends State<SearchTab> {
                   borderSide: BorderSide.none,
                 ),
               ),
-          onChanged: (text) {
-            setState(() {
-              query = text;
-              searchResults = ApiManager.searchMovies(query);
-            });
-          },
-        ),
+              onChanged: (text) {
+                setState(() {
+                  query = text;
+                  searchResults = ApiManager.searchMovies(query);
+                });
+              },
+            ),
             const SizedBox(height: 16),
-              Expanded(
-                child:
-                Container(
+            Expanded(
+              child: Container(
                   margin: const EdgeInsets.symmetric(vertical: 10),
                   height: 250,
-                  child:
-                  FutureBuilder<SearchResponse>(
-                    future:ApiManager.searchMovies(query),
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      final movies = snapshot.data?.results ?? [];
-                      if (movies.isEmpty) {
-                        return Center(
-                            child: Image.asset("assets/images/empty.png"));
-                      }
+                  child: FutureBuilder<SearchResponse>(
+                      future: ApiManager.searchMovies(query),
+                      builder: (context, snapshot) {
+                        if (!snapshot.hasData) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+                        final movies = snapshot.data?.results ?? [];
+                        if (movies.isEmpty) {
+                          return Center(
+                              child: Image.asset("assets/images/empty.png"));
+                        }
 
-                      return GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        return GridView.builder(
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             crossAxisSpacing: 10,
                             mainAxisSpacing: 10,
@@ -77,23 +79,18 @@ class _SearchTabState extends State<SearchTab> {
                             return MovieCard(
                               title: movie.title ?? "Unknown Title",
                               imagePath: movie.posterPath != null
-                                  ? "https://image.tmdb.org/t/p/w500${movie
-                                  .posterPath}"
+                                  ? "https://image.tmdb.org/t/p/w500${movie.posterPath}"
                                   : "assets/images/empty.png", // Fallback image
                               rating: movie.voteAverage!,
                               movieId: movies[index].id!,
                             );
                           },
                         );
-                    }
-                    )
-    ),
-              ),
+                      })),
+            ),
           ],
         ),
       ),
     );
   }
 }
-
-

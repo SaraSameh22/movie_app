@@ -6,12 +6,12 @@ class profileResponse {
 
   profileResponse.fromJson(Map<String, dynamic> json) {
     message = json['message'];
-    data = json['data'] != null ? new Data.fromJson(json['data']) : null;
+    data = json['data'] != null ? Data.fromJson(json['data']) : null;
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
     if (this.data != null) {
       data['data'] = this.data!.toJson();
     }
@@ -32,14 +32,14 @@ class Data {
 
   Data(
       {this.sId,
-        this.email,
-        this.password,
-        this.name,
-        this.phone,
-        this.avaterId,
-        this.createdAt,
-        this.updatedAt,
-        this.iV});
+      this.email,
+      this.password,
+      this.name,
+      this.phone,
+      this.avaterId,
+      this.createdAt,
+      this.updatedAt,
+      this.iV});
 
   Data.fromJson(Map<String, dynamic> json) {
     sId = json['_id'];
@@ -54,16 +54,16 @@ class Data {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['_id'] = this.sId;
-    data['email'] = this.email;
-    data['password'] = this.password;
-    data['name'] = this.name;
-    data['phone'] = this.phone;
-    data['avaterId'] = this.avaterId;
-    data['createdAt'] = this.createdAt;
-    data['updatedAt'] = this.updatedAt;
-    data['__v'] = this.iV;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['_id'] = sId;
+    data['email'] = email;
+    data['password'] = password;
+    data['name'] = name;
+    data['phone'] = phone;
+    data['avaterId'] = avaterId;
+    data['createdAt'] = createdAt;
+    data['updatedAt'] = updatedAt;
+    data['__v'] = iV;
     return data;
   }
 }

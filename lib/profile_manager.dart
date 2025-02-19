@@ -41,6 +41,7 @@ class profileManager {
     } catch (e) {
       throw Exception("Error fetching profile: $e");
     }
+    return null;
   }
 
   static Future<void> updateProfile(

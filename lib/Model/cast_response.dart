@@ -10,17 +10,16 @@ class castResponse {
     if (json['cast'] != null) {
       cast = <Cast>[];
       json['cast'].forEach((v) {
-        cast!.add(new Cast.fromJson(v));
+        cast!.add(Cast.fromJson(v));
       });
     }
     if (json['crew'] != null) {
       crew = <Crew>[];
       json['crew'].forEach((v) {
-        crew!.add(new Crew.fromJson(v));
+        crew!.add(Crew.fromJson(v));
       });
     }
   }
-
 }
 
 class Cast {
@@ -39,17 +38,17 @@ class Cast {
 
   Cast(
       {this.adult,
-        this.gender,
-        this.id,
-        this.knownForDepartment,
-        this.name,
-        this.originalName,
-        this.popularity,
-        this.profilePath,
-        this.castId,
-        this.character,
-        this.creditId,
-        this.order});
+      this.gender,
+      this.id,
+      this.knownForDepartment,
+      this.name,
+      this.originalName,
+      this.popularity,
+      this.profilePath,
+      this.castId,
+      this.character,
+      this.creditId,
+      this.order});
 
   Cast.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
@@ -67,19 +66,19 @@ class Cast {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['adult'] = this.adult;
-    data['gender'] = this.gender;
-    data['id'] = this.id;
-    data['known_for_department'] = this.knownForDepartment;
-    data['name'] = this.name;
-    data['original_name'] = this.originalName;
-    data['popularity'] = this.popularity;
-    data['profile_path'] = this.profilePath;
-    data['cast_id'] = this.castId;
-    data['character'] = this.character;
-    data['credit_id'] = this.creditId;
-    data['order'] = this.order;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['adult'] = adult;
+    data['gender'] = gender;
+    data['id'] = id;
+    data['known_for_department'] = knownForDepartment;
+    data['name'] = name;
+    data['original_name'] = originalName;
+    data['popularity'] = popularity;
+    data['profile_path'] = profilePath;
+    data['cast_id'] = castId;
+    data['character'] = character;
+    data['credit_id'] = creditId;
+    data['order'] = order;
     return data;
   }
 }
@@ -99,16 +98,16 @@ class Crew {
 
   Crew(
       {this.adult,
-        this.gender,
-        this.id,
-        this.knownForDepartment,
-        this.name,
-        this.originalName,
-        this.popularity,
-        this.profilePath,
-        this.creditId,
-        this.department,
-        this.job});
+      this.gender,
+      this.id,
+      this.knownForDepartment,
+      this.name,
+      this.originalName,
+      this.popularity,
+      this.profilePath,
+      this.creditId,
+      this.department,
+      this.job});
 
   Crew.fromJson(Map<String, dynamic> json) {
     adult = json['adult'];
@@ -123,6 +122,4 @@ class Crew {
     department = json['department'];
     job = json['job'];
   }
-
-
 }

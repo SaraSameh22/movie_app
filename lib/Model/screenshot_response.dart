@@ -2,22 +2,21 @@ class screenshotResponse {
   List<Backdrops>? backdrops;
   int? id;
 
-
-  screenshotResponse({this.backdrops, this.id,});
+  screenshotResponse({
+    this.backdrops,
+    this.id,
+  });
 
   screenshotResponse.fromJson(Map<String, dynamic> json) {
     if (json['backdrops'] != null) {
       backdrops = <Backdrops>[];
       json['backdrops'].forEach((v) {
-        backdrops!.add(new Backdrops.fromJson(v));
+        backdrops!.add(Backdrops.fromJson(v));
       });
     }
     id = json['id'];
-    }
   }
-
-
-
+}
 
 class Backdrops {
   double? aspectRatio;
@@ -30,12 +29,12 @@ class Backdrops {
 
   Backdrops(
       {this.aspectRatio,
-        this.height,
-        this.iso6391,
-        this.filePath,
-        this.voteAverage,
-        this.voteCount,
-        this.width});
+      this.height,
+      this.iso6391,
+      this.filePath,
+      this.voteAverage,
+      this.voteCount,
+      this.width});
 
   Backdrops.fromJson(Map<String, dynamic> json) {
     aspectRatio = json['aspect_ratio'];
@@ -48,14 +47,14 @@ class Backdrops {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['aspect_ratio'] = this.aspectRatio;
-    data['height'] = this.height;
-    data['iso_639_1'] = this.iso6391;
-    data['file_path'] = this.filePath;
-    data['vote_average'] = this.voteAverage;
-    data['vote_count'] = this.voteCount;
-    data['width'] = this.width;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['aspect_ratio'] = aspectRatio;
+    data['height'] = height;
+    data['iso_639_1'] = iso6391;
+    data['file_path'] = filePath;
+    data['vote_average'] = voteAverage;
+    data['vote_count'] = voteCount;
+    data['width'] = width;
     return data;
   }
 }

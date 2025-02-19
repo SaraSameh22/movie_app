@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies/Model/movie_response_home.dart';
 import 'package:movies/Model/upcoming_response.dart';
-import 'package:movies/Registeration/forgetpassword_screen.dart';
 import 'package:movies/api_manager.dart';
 import 'package:movies/movie_card.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
-
 
 class HomeTap extends StatefulWidget {
   const HomeTap({super.key});
@@ -15,7 +12,6 @@ class HomeTap extends StatefulWidget {
 }
 
 class _HomeTapState extends State<HomeTap> {
-
   // final PageController _controller = PageController();
 
   @override
@@ -33,12 +29,14 @@ class _HomeTapState extends State<HomeTap> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-             Center(child:Image.asset("assets/images/Available.png"), ),
+              Center(
+                child: Image.asset("assets/images/Available.png"),
+              ),
               Container(
                 margin: const EdgeInsets.symmetric(vertical: 10),
                 height: 250,
                 child: FutureBuilder<popularResponse>(
-                  future:ApiManager.getPopular(),
+                  future: ApiManager.getPopular(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
                       return const Center(
@@ -55,21 +53,26 @@ class _HomeTapState extends State<HomeTap> {
                       itemCount: movies.length,
                       itemBuilder: (context, index) {
                         final movie = movies[index];
-                        return MovieCard(title: movie.title??"",
-                          imagePath:"https://image.tmdb.org/t/p/original/${movie.posterPath ?? ''}" ,
-                          rating: movie.voteAverage?? 0,
-                          movieId: movies[index].id!,);
-
+                        return MovieCard(
+                          title: movie.title ?? "",
+                          imagePath:
+                              "https://image.tmdb.org/t/p/original/${movie.posterPath ?? ''}",
+                          rating: movie.voteAverage ?? 0,
+                          movieId: movies[index].id!,
+                        );
                       },
                     );
                   },
                 ),
               ),
-            Center(child: Image.asset("assets/images/Watch.png" ,)) ,
+              Center(
+                  child: Image.asset(
+                "assets/images/Watch.png",
+              )),
               const SizedBox(height: 10),
-              Row(
+              const Row(
                 children: [
-                  const Text(
+                  Text(
                     " Action ",
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
@@ -78,7 +81,7 @@ class _HomeTapState extends State<HomeTap> {
                     ),
                   ),
                   Spacer(),
-                  const Text(
+                  Text(
                     " see More ",
                     style: TextStyle(
                       fontWeight: FontWeight.normal,
@@ -92,7 +95,7 @@ class _HomeTapState extends State<HomeTap> {
                 margin: const EdgeInsets.symmetric(vertical: 10),
                 height: 250,
                 child: FutureBuilder<upcomingResponse>(
-                  future:ApiManager.getUpcoming(),
+                  future: ApiManager.getUpcoming(),
                   builder: (context, snapshot) {
                     if (!snapshot.hasData) {
                       return const Center(
@@ -108,11 +111,13 @@ class _HomeTapState extends State<HomeTap> {
                       itemCount: movies.length,
                       itemBuilder: (context, index) {
                         final movie = movies[index];
-                        return MovieCard(title: movie.title??"",
-                          imagePath:"https://image.tmdb.org/t/p/original/${movie.posterPath ?? ''}" ,
-                          rating: movie.voteAverage?? 0,
-                          movieId: movies[index].id!,);
-
+                        return MovieCard(
+                          title: movie.title ?? "",
+                          imagePath:
+                              "https://image.tmdb.org/t/p/original/${movie.posterPath ?? ''}",
+                          rating: movie.voteAverage ?? 0,
+                          movieId: movies[index].id!,
+                        );
                       },
                     );
                   },
@@ -125,4 +130,3 @@ class _HomeTapState extends State<HomeTap> {
     );
   }
 }
-

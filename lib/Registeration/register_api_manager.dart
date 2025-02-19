@@ -5,7 +5,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class RegisterApi {
   final String baseUrl = "https://route-movie-apis.vercel.app";
 
-  Future<Map<String, dynamic>> registerUser(String name, String email, String password, String confirmPassword, String phone, int avaterId) async {
+  Future<Map<String, dynamic>> registerUser(
+      String name,
+      String email,
+      String password,
+      String confirmPassword,
+      String phone,
+      int avaterId) async {
     final Uri url = Uri.parse("$baseUrl/auth/register");
     try {
       final response = await http.post(
@@ -61,7 +67,8 @@ class RegisterApi {
 
       if (response.statusCode == 200) {
         final responseData = jsonDecode(response.body);
-        final token = responseData["data"]; // Token is stored in the "data" field
+        final token =
+            responseData["data"]; // Token is stored in the "data" field
 
         if (token != null) {
           SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -91,8 +98,4 @@ class RegisterApi {
       };
     }
   }
-
-
-
-
 }

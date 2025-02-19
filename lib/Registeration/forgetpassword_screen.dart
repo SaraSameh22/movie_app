@@ -7,63 +7,89 @@ import 'package:provider/provider.dart';
 class ForgotPasswordScreen extends StatefulWidget {
   static const String routeName = "ForegetPasswordScreen";
 
+  const ForgotPasswordScreen({super.key});
+
   @override
   State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
-
   final _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-
     final languageProvider = Provider.of<LanguageProvider>(context);
     return Scaffold(
-      appBar: AppBar( leading: IconButton(onPressed: () {
-        Navigator.pushNamed(
-            context,LoginScreen.routeName);
-      },
-          icon: Icon(Icons.arrow_back , color: Color(0XFFF6BD00),) ),
-        title: Text(languageProvider.locale.languageCode == 'ar'? '  كلمه المرور  ': 'Forget Password', style: TextStyle(color: Color(0XFFF6BD00), fontSize: 16 , fontWeight: FontWeight.bold)),
+      appBar: AppBar(
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pushNamed(context, LoginScreen.routeName);
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: Color(0XFFF6BD00),
+            )),
+        title: Text(
+            languageProvider.locale.languageCode == 'ar'
+                ? '  كلمه المرور  '
+                : 'Forget Password',
+            style: const TextStyle(
+                color: Color(0XFFF6BD00),
+                fontSize: 16,
+                fontWeight: FontWeight.bold)),
         backgroundColor: Colors.black,
-        centerTitle: true,),
+        centerTitle: true,
+      ),
       backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20.0),
         child: Form(
-          key:_formKey,
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image(image: AssetImage('assets/images/Forgot_Password.png')),
-              SizedBox(height: 20),
+              const Image(image: AssetImage('assets/images/Forgot_Password.png')),
+              const SizedBox(height: 20),
               TextFormField(
                 decoration: InputDecoration(
                   hintText: languageProvider.locale.languageCode == 'ar'
                       ? ' الايميل'
                       : 'Email',
-                  hintStyle: TextStyle( color: Colors.white , fontWeight: FontWeight.bold , fontSize: 16),
+                  hintStyle: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16),
                   filled: true,
                   fillColor: Colors.grey[800],
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
-                  prefixIcon: ImageIcon(AssetImage('assets/images/Email_Icon.png'),color: Colors.white,),
+                  prefixIcon: const ImageIcon(
+                    AssetImage('assets/images/Email_Icon.png'),
+                    color: Colors.white,
+                  ),
                 ),
-                style: TextStyle(color: Colors.white),
+                style: const TextStyle(color: Colors.white),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, HomeScreen.routName);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0XFFF6BD00),
-                  minimumSize: Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                  backgroundColor: const Color(0XFFF6BD00),
+                  minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
                 ),
-                child: Text(languageProvider.locale.languageCode == 'ar'? 'تأكيد الايميل': 'Verify Email', style: TextStyle(color: Colors.black , fontWeight: FontWeight.bold , fontSize: 20)),
+                child: Text(
+                    languageProvider.locale.languageCode == 'ar'
+                        ? 'تأكيد الايميل'
+                        : 'Verify Email',
+                    style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20)),
               ),
             ],
           ),

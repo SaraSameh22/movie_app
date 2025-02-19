@@ -5,7 +5,7 @@ class categoriesResponse {
     if (json['genres'] != null) {
       genres = <Genres>[];
       json['genres'].forEach((v) {
-        genres!.add(new Genres.fromJson(v));
+        genres!.add(Genres.fromJson(v));
       });
     }
   }
@@ -21,8 +21,4 @@ class Genres {
     id = json['id'];
     name = json['name'];
   }
-
 }
-
-
-

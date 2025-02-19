@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:movies/Registeration/login_screen.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
   static const String routeName = "OnboardingScreen";
+
+  const OnboardingScreen({super.key});
   @override
   _OnboardingScreenState createState() => _OnboardingScreenState();
 }
@@ -27,7 +28,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                       'Get access to a huge library of movies\n to suit all tastes. you will surely like it',
                   buttonText: 'Explore Now',
                   buttonAction: () => _controller.nextPage(
-                    duration: Duration(milliseconds: 300),
+                    duration: const Duration(milliseconds: 300),
                     curve: Curves.easeInOut,
                   ),
                 ),
@@ -38,12 +39,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         'Explore a vast collection of movies in all qualities and genres  Find your next favorite film with ease.',
                     buttonText: 'Next',
                     buttonAction: () => _controller.nextPage(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
                         ),
                     buttonText2: 'Back',
                     buttonAction2: () => _controller.previousPage(
-                          duration: Duration(microseconds: 300),
+                          duration: const Duration(microseconds: 300),
                           curve: Curves.easeInOut,
                         )),
                 buildPage(
@@ -53,12 +54,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         'Discover movies from every genre, in all available qualities. Find something new and exciting to watch every day.',
                     buttonText: 'Next',
                     buttonAction: () => _controller.nextPage(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
                         ),
                     buttonText2: 'Back',
                     buttonAction2: () => _controller.previousPage(
-                          duration: Duration(microseconds: 300),
+                          duration: const Duration(microseconds: 300),
                           curve: Curves.easeInOut,
                         )),
                 buildPage(
@@ -68,12 +69,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         'Save movies to your watchlist to keep track of what you want to watch next.',
                     buttonText: 'Next',
                     buttonAction: () => _controller.nextPage(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
                         ),
                     buttonText2: 'Back',
                     buttonAction2: () => _controller.previousPage(
-                          duration: Duration(microseconds: 300),
+                          duration: const Duration(microseconds: 300),
                           curve: Curves.easeInOut,
                         )),
                 buildPage(
@@ -83,12 +84,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         'Share your thoughts and discover great movies with your reviews.',
                     buttonText: 'Next',
                     buttonAction: () => _controller.nextPage(
-                          duration: Duration(milliseconds: 300),
+                          duration: const Duration(milliseconds: 300),
                           curve: Curves.easeInOut,
                         ),
                     buttonText2: 'Back',
                     buttonAction2: () => _controller.previousPage(
-                          duration: Duration(microseconds: 300),
+                          duration: const Duration(microseconds: 300),
                           curve: Curves.easeInOut,
                         )),
                 buildPage(
@@ -99,12 +100,12 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                     buttonAction: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => LoginScreen()),
+                        MaterialPageRoute(builder: (context) => const LoginScreen()),
                       );
                     },
                     buttonText2: 'Back',
                     buttonAction2: () => _controller.previousPage(
-                          duration: Duration(microseconds: 300),
+                          duration: const Duration(microseconds: 300),
                           curve: Curves.easeInOut,
                         )),
               ],
@@ -125,7 +126,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     required VoidCallback buttonAction2,
   }) {
     return Container(
-      padding: EdgeInsets.only(top: 520),
+      padding: const EdgeInsets.only(top: 700),
       decoration: BoxDecoration(
         image: DecorationImage(
           image: AssetImage(imagePath),
@@ -135,8 +136,8 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         ),
       ),
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 16),
-        decoration: BoxDecoration(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        decoration: const BoxDecoration(
             color: Colors.black,
             borderRadius: BorderRadius.only(
                 topRight: Radius.circular(40), topLeft: Radius.circular(40))),
@@ -147,45 +148,45 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white,
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             Text(
               description,
               textAlign: TextAlign.center,
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white70,
                 fontSize: 20,
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: buttonAction,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0XFFF6BD00),
+                  backgroundColor: const Color(0XFFF6BD00),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),
                   ),
                 ),
                 child: Text(
                   buttonText,
-                  style: TextStyle(color: Colors.black),
+                  style: const TextStyle(color: Colors.black),
                 ),
               ),
             ),
-            SizedBox(height: 8),
+            const SizedBox(height: 8),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: buttonAction2,
                 style: ElevatedButton.styleFrom(
-                  side: BorderSide(
+                  side: const BorderSide(
                     color: Color(0XFFF6BD00), // Border color
                     width: 2, // Border width
                   ),
@@ -196,7 +197,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                 ),
                 child: Text(
                   buttonText2,
-                  style: TextStyle(color: Color(0XFFF6BD00)),
+                  style: const TextStyle(color: Color(0XFFF6BD00)),
                 ),
               ),
             ),
@@ -216,7 +217,7 @@ Widget buildPoster({
   required VoidCallback buttonAction,
 }) {
   return Container(
-    padding: EdgeInsets.symmetric(horizontal: 16.0),
+    padding: const EdgeInsets.symmetric(horizontal: 16.0),
     decoration: BoxDecoration(
       image: DecorationImage(
         image: AssetImage(imagePath),
@@ -232,39 +233,39 @@ Widget buildPoster({
         Text(
           title,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 10),
+        const SizedBox(height: 10),
         Text(
           description,
           textAlign: TextAlign.center,
-          style: TextStyle(
+          style: const TextStyle(
             color: Colors.white70,
             fontSize: 14,
           ),
         ),
-        SizedBox(height: 20),
+        const SizedBox(height: 20),
         SizedBox(
           width: double.infinity,
           child: ElevatedButton(
             onPressed: buttonAction,
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color(0XFFF6BD00),
+              backgroundColor: const Color(0XFFF6BD00),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
             ),
             child: Text(
               buttonText,
-              style: TextStyle(color: Color(0XFF121312)),
+              style: const TextStyle(color: Color(0XFF121312)),
             ),
           ),
         ),
-        SizedBox(height: 16),
+        const SizedBox(height: 16),
       ],
     ),
   );

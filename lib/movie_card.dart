@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/Provider/history_provider.dart';
 import 'package:movies/movie_details_screen.dart';
-import 'package:movies/profile_manager.dart';
 import 'package:provider/provider.dart';
 
 class MovieCard extends StatelessWidget {
@@ -10,35 +9,33 @@ class MovieCard extends StatelessWidget {
   final double rating;
   final int movieId;
 
-  const MovieCard({
-    required this.title,
-    required this.imagePath,
-    required this.rating,
-    required this.movieId
-  });
+  const MovieCard(
+      {super.key, required this.title,
+      required this.imagePath,
+      required this.rating,
+      required this.movieId});
 
   @override
   Widget build(BuildContext context) {
-    return
-      GestureDetector(
-        onTap:  () {
-          final movie = Movie(
-            id: movieId,
-            title: title,
-            imagePath: imagePath,
-            rating: rating,
-          );
-          Provider.of<HistoryManager>(context, listen: false).addToHistory(movie);
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => MovieDetailsScreen(movieId: movieId),
-            ),
-          );
+    return GestureDetector(
+      onTap: () {
+        final movie = Movie(
+          id: movieId,
+          title: title,
+          imagePath: imagePath,
+          rating: rating,
+        );
+        Provider.of<HistoryManager>(context, listen: false).addToHistory(movie);
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => MovieDetailsScreen(movieId: movieId),
+          ),
+        );
 
-          // profileManager.addToHistory(movieId);
-        },
-        child: Stack(
+        // profileManager.addToHistory(movieId);
+      },
+      child: Stack(
         children: [
           Container(
             width: 180,
@@ -53,33 +50,34 @@ class MovieCard extends StatelessWidget {
               ),
             ),
           ),
-            Positioned(
-              top: 16,
-              left: 16,
-              child: Container(
-                decoration: BoxDecoration(
-                  color: Colors.black.withOpacity(0.7),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                child: Row(
-                  children: [
-                    Text(
-                      "${rating.toStringAsFixed(1)}",
-                      style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(width: 4),
-                    const Icon(
-                      Icons.star,
-                      color: Colors.yellow,
-                      size: 16,
-                    ),
-                  ],
-                ),
+          Positioned(
+            top: 16,
+            left: 16,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.black.withOpacity(0.7),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+              child: Row(
+                children: [
+                  Text(
+                    rating.toStringAsFixed(1),
+                    style: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                  ),
+                  const SizedBox(width: 4),
+                  const Icon(
+                    Icons.star,
+                    color: Colors.yellow,
+                    size: 16,
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      );
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -9,14 +9,14 @@ class watchListResponse {
     if (json['data'] != null) {
       data = <Data>[];
       json['data'].forEach((v) {
-        data!.add(new Data.fromJson(v));
+        data!.add(Data.fromJson(v));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['message'] = this.message;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['message'] = message;
     if (this.data != null) {
       data['data'] = this.data!.map((v) => v.toJson()).toList();
     }
@@ -36,18 +36,18 @@ class Data {
   Data.fromJson(Map<String, dynamic> json) {
     movieId = int.parse(json['movieId']);
     name = json['name'];
-    rating = json['rating'];
+    rating = (json['rating'] as num?)?.toDouble();
     imageURL = json['imageURL'];
     year = json['year'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['movieId'] = this.movieId;
-    data['name'] = this.name;
-    data['rating'] = this.rating;
-    data['imageURL'] = this.imageURL;
-    data['year'] = this.year;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['movieId'] = movieId;
+    data['name'] = name;
+    data['rating'] = rating;
+    data['imageURL'] = imageURL;
+    data['year'] = year;
     return data;
   }
 }

@@ -6,10 +6,8 @@ import 'package:movies/Registeration/register_api_manager.dart';
 import 'package:movies/home_screen.dart';
 import 'package:movies/Registeration/register_screen.dart';
 import 'package:provider/provider.dart';
-import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class LoginScreen extends StatefulWidget {
   static const String routeName = "LoginScreen";
@@ -23,7 +21,6 @@ class _LoginScreenState extends State<LoginScreen> {
   bool _isObscure = true;
   final _formKey = GlobalKey<FormState>();
   final _apiLog = RegisterApi();
-
 
   String _email = "";
   String _password = "";
@@ -44,7 +41,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String? token = prefs.getString('auth_token');
-
 
     if (token != null) {
       await prefs.setBool('isLoggedIn', true);
@@ -76,7 +72,6 @@ class _LoginScreenState extends State<LoginScreen> {
       _formKey.currentState!.save();
       print("Email: $_email");
       print("Password: $_password");
-
     }
     // if (response["success"]) {
     //   // Navigator.pushReplacement(
@@ -85,12 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
     //   // );
     //   Navigator.pushNamed(context, HomeScreen.routName);
     // }
-
-
   }
-
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -100,49 +90,60 @@ class _LoginScreenState extends State<LoginScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: Form(
-          key:_formKey,
+          key: _formKey,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Image(image: AssetImage("assets/images/splash.png")),
-              SizedBox(height: 20),
-               TextFormField(
+              const Image(image: AssetImage("assets/images/splash.png")),
+              const SizedBox(height: 20),
+              TextFormField(
                 decoration: InputDecoration(
-                  hintText: languageProvider.locale.languageCode == 'ar'
-                      ? 'البريد الإلكتروني'
-                      : 'Email',
-                  filled: true,
-                  fillColor: Color(0XFF282A28),
-                  hintStyle: TextStyle( color: Colors.white , fontWeight: FontWeight.bold),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  prefixIcon: ImageIcon(AssetImage('assets/images/Email_Icon.png') , color: Colors.white,)
-                ),
-                 keyboardType: TextInputType.emailAddress,
-                 validator: (value) {
-                   if (value == null || value.isEmpty) return "Please enter your email";
-                   if (!value.contains("@")) return "Enter a valid email address";
-                   return null;
-                 },
-                 onSaved: (value) => _email = value!,
-                style: TextStyle(color: Colors.white),
+                    hintText: languageProvider.locale.languageCode == 'ar'
+                        ? 'البريد الإلكتروني'
+                        : 'Email',
+                    filled: true,
+                    fillColor: const Color(0XFF282A28),
+                    hintStyle: const TextStyle(
+                        color: Colors.white, fontWeight: FontWeight.bold),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    prefixIcon: const ImageIcon(
+                      AssetImage('assets/images/Email_Icon.png'),
+                      color: Colors.white,
+                    )),
+                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return "Please enter your email";
+                  }
+                  if (!value.contains("@")) {
+                    return "Enter a valid email address";
+                  }
+                  return null;
+                },
+                onSaved: (value) => _email = value!,
+                style: const TextStyle(color: Colors.white),
               ),
-              SizedBox(height: 15),
-               TextFormField(
+              const SizedBox(height: 15),
+              TextFormField(
                 obscureText: _isObscure,
                 decoration: InputDecoration(
                   hintText: languageProvider.locale.languageCode == 'ar'
                       ? 'كلمة المرور'
                       : 'Password',
                   filled: true,
-                  fillColor: Color(0XFF282A28),
-                  hintStyle: TextStyle( color: Colors.white , fontWeight: FontWeight.bold),
+                  fillColor: const Color(0XFF282A28),
+                  hintStyle: const TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
                   border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
+                    borderRadius: BorderRadius.circular(8),
                   ),
-                  prefixIcon: ImageIcon(AssetImage('assets/images/Passwod_Icon.png') , color: Colors.white,),
-                  suffixIcon:IconButton(
+                  prefixIcon: const ImageIcon(
+                    AssetImage('assets/images/Passwod_Icon.png'),
+                    color: Colors.white,
+                  ),
+                  suffixIcon: IconButton(
                     icon: Icon(
                       _isObscure ? Icons.visibility_off : Icons.visibility,
                       color: Colors.white,
@@ -154,74 +155,102 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                   ),
                 ),
-                 validator: (value) {
-                   if (value == null || value.length < 6) return "Password must be at least 6 characters";
-                   return null;
-                 },
-                 onSaved: (value) => _password = value!,
-                style: TextStyle(color: Colors.white),
+                validator: (value) {
+                  if (value == null || value.length < 6) {
+                    return "Password must be at least 6 characters";
+                  }
+                  return null;
+                },
+                onSaved: (value) => _password = value!,
+                style: const TextStyle(color: Colors.white),
               ),
-              SizedBox(height: 10),
-                Align(
+              const SizedBox(height: 10),
+              Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
                   onPressed: () {
                     Navigator.pushReplacement(
                       context,
-                      MaterialPageRoute(builder: (context) => ForgotPasswordScreen()),
+                      MaterialPageRoute(
+                          builder: (context) => const ForgotPasswordScreen()),
                     );
                   },
-                  child: Text( languageProvider.locale.languageCode == 'ar'? 'نسيت كلمة المرور؟': 'Forgot Password?', style: TextStyle(color: Color(0XFFF6BD00) , fontWeight: FontWeight.bold)),
+                  child: Text(
+                      languageProvider.locale.languageCode == 'ar'
+                          ? 'نسيت كلمة المرور؟'
+                          : 'Forgot Password?',
+                      style: const TextStyle(
+                          color: Color(0XFFF6BD00),
+                          fontWeight: FontWeight.bold)),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               ElevatedButton(
                 onPressed: _login,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0XFFF6BD00),
-                  minimumSize: Size(double.infinity, 50),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                  backgroundColor: const Color(0XFFF6BD00),
+                  minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
                 ),
-                child: Text(languageProvider.locale.languageCode == 'ar'? 'تسجيل الدخول': 'Login', style: TextStyle(color: Colors.black  , fontSize: 16)),
+                child: Text(
+                    languageProvider.locale.languageCode == 'ar'
+                        ? 'تسجيل الدخول'
+                        : 'Login',
+                    style: const TextStyle(color: Colors.black, fontSize: 16)),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(languageProvider.locale.languageCode == 'ar'? '  ليس لدى حساب ؟': 'Don’t Have Account ? ', style: TextStyle(color: Colors.white , fontWeight: FontWeight.bold)),
+                  Text(
+                      languageProvider.locale.languageCode == 'ar'
+                          ? '  ليس لدى حساب ؟'
+                          : 'Don’t Have Account ? ',
+                      style: const TextStyle(
+                          color: Colors.white, fontWeight: FontWeight.bold)),
                   GestureDetector(
                     onTap: () {
                       Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => RegisterScreen()),
+                        MaterialPageRoute(
+                            builder: (context) => const RegisterScreen()),
                       );
                     },
                     child: Text(
-                      languageProvider.locale.languageCode == 'ar'? 'إنشاء': 'Create one',
-                      style: TextStyle(color: Color(0XFFF6BD00), fontWeight: FontWeight.bold),
+                      languageProvider.locale.languageCode == 'ar'
+                          ? 'إنشاء'
+                          : 'Create one',
+                      style: const TextStyle(
+                          color: Color(0XFFF6BD00),
+                          fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 20),
-              Text('OR', style: TextStyle(color: Colors.white)),
-              SizedBox(height: 10),
+              const SizedBox(height: 20),
+              const Text('OR', style: TextStyle(color: Colors.white)),
+              const SizedBox(height: 10),
               ElevatedButton.icon(
                 onPressed: () {},
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0XFFF6BD00),
-                  minimumSize: Size(double.infinity, 50),
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                  backgroundColor: const Color(0XFFF6BD00),
+                  minimumSize: const Size(double.infinity, 50),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
                 ),
                 icon: SvgPicture.asset(
                   'assets/images/google.svg',
                   width: 20,
                   height: 20,
                 ),
-                label: Text(languageProvider.locale.languageCode == 'ar'? 'تسجيل الدخول بحساب جوجل': 'Login with Google', style: TextStyle(color: Colors.black , fontSize: 16) ),
-
+                label: Text(
+                    languageProvider.locale.languageCode == 'ar'
+                        ? 'تسجيل الدخول بحساب جوجل'
+                        : 'Login with Google',
+                    style: const TextStyle(color: Colors.black, fontSize: 16)),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               GestureDetector(
                 onTap: () {
                   languageProvider.toggleLanguage();
@@ -229,19 +258,19 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Container(
                   width: 70,
                   height: 35,
-                  padding: EdgeInsets.all(4),
+                  padding: const EdgeInsets.all(4),
                   decoration: BoxDecoration(
                     color: Colors.black,
                     borderRadius: BorderRadius.circular(20),
                     border: Border.all(
-                      color: Color(0XFFF6BD00),
+                      color: const Color(0XFFF6BD00),
                       width: 2,
                     ),
                   ),
                   child: Stack(
                     children: [
                       AnimatedAlign(
-                        duration: Duration(milliseconds: 300),
+                        duration: const Duration(milliseconds: 300),
                         curve: Curves.easeInOut,
                         alignment: languageProvider.locale.languageCode == 'ar'
                             ? Alignment.centerRight
@@ -249,7 +278,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Container(
                           width: 30,
                           height: 30,
-                          decoration: BoxDecoration(
+                          decoration: const BoxDecoration(
                             color: Color(0XFFF6BD00),
                             shape: BoxShape.circle,
                           ),
@@ -276,16 +305,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     ],
                   ),
                 ),
-
               ),
-
             ],
           ),
         ),
       ),
-
     );
   }
 }
-
-

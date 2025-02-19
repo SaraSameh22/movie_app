@@ -12,13 +12,15 @@ import 'package:movies/Model/upcoming_response.dart';
 import 'Model/movie_response_home.dart';
 
 class ApiManager {
-
   static Future<categoriesResponse> getCategory() async {
-    Uri url = Uri.parse("https://api.themoviedb.org/3/genre/movie/list?api_key=7844ed77e021c66cba973afe4f77066d");
+    Uri url = Uri.parse(
+        "https://api.themoviedb.org/3/genre/movie/list?api_key=7844ed77e021c66cba973afe4f77066d");
     try {
-      final response = await http.get(url,
+      final response = await http.get(
+        url,
         headers: {
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw",
+          "Authorization":
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw",
         },
       );
       if (response.statusCode == 200) {
@@ -36,13 +38,15 @@ class ApiManager {
   }
 
   static Future<movieResponse> getMovies({int? genreId}) async {
-    Uri url = Uri.parse("https://api.themoviedb.org/3/discover/movie?with_genres=$genreId&api_key=7844ed77e021c66cba973afe4f77066d");
+    Uri url = Uri.parse(
+        "https://api.themoviedb.org/3/discover/movie?with_genres=$genreId&api_key=7844ed77e021c66cba973afe4f77066d");
 
     try {
       final response = await http.get(
         url,
         headers: {
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw",
+          "Authorization":
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw",
         },
       );
 
@@ -67,11 +71,13 @@ class ApiManager {
     Uri url = Uri.https("api.themoviedb.org", "/3/search/movie", {
       "api_key": "7844ed77e021c66cba973afe4f77066d",
       "query": query,
-    });    try {
+    });
+    try {
       final response = await http.get(
         url,
         headers: {
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw"
+          "Authorization":
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw"
         },
       );
 
@@ -93,12 +99,14 @@ class ApiManager {
   }
 
   static Future<popularResponse> getPopular() async {
-    Uri url = Uri.parse("https://api.themoviedb.org/3/movie/popular?api_key=7844ed77e021c66cba973afe4f77066d");
+    Uri url = Uri.parse(
+        "https://api.themoviedb.org/3/movie/popular?api_key=7844ed77e021c66cba973afe4f77066d");
     try {
       final response = await http.get(
         url,
         headers: {
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw",
+          "Authorization":
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw",
         },
       );
 
@@ -120,12 +128,14 @@ class ApiManager {
   }
 
   static Future<upcomingResponse> getUpcoming() async {
-    Uri url = Uri.parse("https://api.themoviedb.org/3/movie/upcoming?api_key=7844ed77e021c66cba973afe4f77066d");
+    Uri url = Uri.parse(
+        "https://api.themoviedb.org/3/movie/upcoming?api_key=7844ed77e021c66cba973afe4f77066d");
     try {
       final response = await http.get(
         url,
         headers: {
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw",
+          "Authorization":
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw",
         },
       );
 
@@ -155,7 +165,7 @@ class ApiManager {
         url,
         headers: {
           "Authorization":
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw"
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw"
         },
       );
 
@@ -180,7 +190,7 @@ class ApiManager {
         url,
         headers: {
           "Authorization":
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw"
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw"
         },
       );
 
@@ -206,7 +216,7 @@ class ApiManager {
         url,
         headers: {
           "Authorization":
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw"
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw"
         },
       );
 
@@ -232,7 +242,7 @@ class ApiManager {
         url,
         headers: {
           "Authorization":
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw"
+              "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3ODQ0ZWQ3N2UwMjFjNjZjYmE5NzNhZmU0Zjc3MDY2ZCIsIm5iZiI6MTczODY4NjkxOS4zODQsInN1YiI6IjY3YTI0MWM3ZWVhODlhZGYwOTAzMDRiMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.plYHrjhpSGIor5zlSRCMPTOT9SZN3HDQ73zUsoXkhZw"
         },
       );
 
@@ -248,6 +258,4 @@ class ApiManager {
       throw Exception("Failed to fetch movie details: $e");
     }
   }
-  }
-
-
+}
